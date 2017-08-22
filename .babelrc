@@ -1,0 +1,54 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "loose": true,
+        "useBuiltIns": true,
+
+        "production": {
+          "presets": [
+            ["env", {
+              "targets": {
+                "node": "current",
+                "browsers": "> 5%"
+              }
+            }]
+          ]
+        },
+        "development": {
+          "sourceMaps" : true,
+          "presets": [
+            ["env", {
+              "targets": {
+                "node": "current",
+                "browsers": "last 1 chrome version"
+              }
+            }]
+          ]
+        },
+        "test": {
+          "sourceMaps" : true,
+          "presets": [
+            ["env", {
+              "targets": {
+                "node": "current"
+              }
+            }]
+          ]
+        }
+      }
+    ],
+    "react"
+  ],
+  "plugins": [
+    "transform-runtime",
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "es6-promise",
+    ["module-resolver", {
+      "root": ["."]
+    }]
+  ]
+}
