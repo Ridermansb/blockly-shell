@@ -23,6 +23,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
+    "clipboard": "^1.7.1",
     "element-react": "^1.1.6",
     "element-theme-default": "^1.4.2",
     "es6-promise": "^4.1.1",
