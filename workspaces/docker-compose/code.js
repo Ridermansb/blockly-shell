@@ -2,7 +2,7 @@ import Blockly from 'node-blockly/browser';
 
 Blockly.DockerCompose.DockerCompose = (block) => {
   const statements = Blockly.DockerCompose.statementToCode(block, 'DockerCompose');
-  return `docker-compose ${statements}\n`;
+  return `${statements.trim().split('\n').join(';')}\n`;
 };
 
 Blockly.DockerCompose.DockerComposeDown = (block) => {
@@ -23,5 +23,5 @@ Blockly.DockerCompose.DockerComposeDown = (block) => {
     code += ' --remove-orphans'
   }
 
-  return code;
+  return `docker-compose ${code.trim()}\n`;
 }

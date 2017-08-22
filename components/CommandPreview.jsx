@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import hljs from 'highlight.js';
 import { Card, Layout } from 'element-react';
+
+import 'highlight.js/styles/github-gist.css';
 
 const styles = {
   root: {
@@ -22,6 +25,11 @@ export default class extends PureComponent {
     commands: ''
   }
 
+  componentDidMount() {
+    hljs.configure({useBR: true});
+    hljs.initHighlighting();
+  }
+
   render() {
     const { commands }  = this.props;
     const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
@@ -32,8 +40,8 @@ export default class extends PureComponent {
         <div className="grid-content bg-purple-dark">
           <Card className="box-card">
             <pre>
-              <code className="lang-sh">
-                {commands}
+              <code className="shell">
+                {hljs.highlight('shell', commands).value}
               </code>
             </pre>
           </Card>

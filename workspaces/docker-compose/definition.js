@@ -16,7 +16,7 @@ Blockly.Blocks.DockerCompose = {
 };
 
 /**
- * @see https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#v38xyy
+ * @see https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#r4efaw
  * @type {{init: (())}}
  */
 Blockly.Blocks.DockerComposeDown = {
@@ -24,7 +24,7 @@ Blockly.Blocks.DockerComposeDown = {
     this.appendDummyInput()
       .appendField("down")
       .appendField("Remove Image?")
-      .appendField(new Blockly.FieldDropdown([["No","0"], ["All","--all"], ["Local","--local"]]), "RemoveImage")
+      .appendField(new Blockly.FieldDropdown([["No","0"], ["All","all"], ["Local","local"]]), "RemoveImage")
       .appendField("Remove volumes?")
       .appendField(new Blockly.FieldCheckbox("TRUE"), "RemoveVolumes")
       .appendField("Remove containers?")

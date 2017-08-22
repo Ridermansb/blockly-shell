@@ -26,6 +26,7 @@
     "element-react": "^1.1.6",
     "element-theme-default": "^1.4.2",
     "es6-promise": "^4.1.1",
+    "highlight.js": "^9.12.0",
     "node-blockly": "^1.0.24",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
