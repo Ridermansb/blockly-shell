@@ -21,14 +21,14 @@ export default class extends PureComponent {
     this.workspace = workspace;
     workspace.addChangeListener(this.onWorkspaceChange);
     this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions.bind(this), false);
+    window.addEventListener("resize", this.updateDimensions, false);
 
     Blockly.svgResize(workspace);
 
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions.bind(this));
+    window.removeEventListener("resize", this.updateDimensions);
   }
 
   @autobind
