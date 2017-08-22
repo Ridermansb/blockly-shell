@@ -8,6 +8,10 @@ export default class extends PureComponent {
 
   static displayName = 'WorkSpace';
 
+  state = {
+    blocklyAreaHeight: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+  }
+
   static propTypes = {
     onChange: PropTypes.func,
   }
@@ -20,8 +24,9 @@ export default class extends PureComponent {
     const workspace = Blockly.inject(this.blocklyDiv, DockerCompose);
     this.workspace = workspace;
     workspace.addChangeListener(this.onWorkspaceChange);
+
     this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions, false);
+    window.addEventListener("resize", this.updateDimensions);
 
     Blockly.svgResize(workspace);
 
@@ -62,12 +67,16 @@ export default class extends PureComponent {
     this.blocklyDiv.style.top = y + 'px';
     this.blocklyDiv.style.width = this.blocklyArea.offsetWidth + 'px';
     this.blocklyDiv.style.height = this.blocklyArea.offsetHeight + 'px';
+
+    this.setState((prevState, props) => ({
+      blocklyAreaHeight: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    }));
   }
 
   render() {
-    const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    const { blocklyAreaHeight }  = this.state;
     return (
-      <div ref={(el) => { this.blocklyArea = el; }} style={{ height: h }} >
+      <div ref={(el) => { this.blocklyArea = el; }} style={{ height: blocklyAreaHeight }} >
         <div ref={(el) => { this.blocklyDiv = el; }} style={{ position: 'absolute' }} />
       </div>
     );

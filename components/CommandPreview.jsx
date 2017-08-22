@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { autobind } from 'core-decorators';
 import hljs from 'highlight.js';
 import Clipboard from 'clipboard';
 import { Message, Card, Layout, Button } from 'element-react';
@@ -35,9 +36,16 @@ export default class extends PureComponent {
     commands: ''
   }
 
+  state = {
+    blocklyAreaHeight: Math.max(document.documentElement.clientWidth, window.innerWidth || 0) - 210
+  }
+
   componentDidMount() {
     hljs.configure({useBR: true});
     hljs.initHighlighting();
+
+    this.updateDimensions();
+    window.addEventListener("resize", this.updateDimensions);
 
     const self = this;
     this.clipboard = new Clipboard('.copyButton', {
@@ -65,12 +73,20 @@ export default class extends PureComponent {
 
   componentWillUnmount() {
     this.clipboard.destroy();
+    window.removeEventListener("resize", this.updateDimensions);
+  }
+
+  @autobind
+  updateDimensions() {
+    this.setState((prevState, props) => ({
+      rootWidth: Math.max(document.documentElement.clientWidth, window.innerWidth || 0) - 210
+    }));
   }
 
   render() {
     const { commands }  = this.props;
-    const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    styles.root.width = w - 210;
+    const { rootWidth }  = this.state;
+    styles.root.width = rootWidth;
 
     const clipboardCopyIsSupport = Clipboard.isSupported();
 
