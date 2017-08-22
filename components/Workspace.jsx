@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Blockly from 'node-blockly/browser';
 import { autobind } from 'core-decorators';
 import DockerCompose from '../workspaces/docker-compose';
@@ -7,9 +8,18 @@ export default class extends PureComponent {
 
   static displayName = 'WorkSpace';
 
+  static propTypes = {
+    onChange: PropTypes.func,
+  }
+
+  static defaultProps = {
+    onChange: undefined
+  }
+
   componentDidMount() {
     const workspace = Blockly.inject(this.blocklyDiv, DockerCompose);
-    // self.workspace.addChangeListener(self.onWorkspaceChange);
+    this.workspace = workspace;
+    workspace.addChangeListener(this.onWorkspaceChange);
     this.updateDimensions();
     window.addEventListener("resize", this.updateDimensions.bind(this), false);
 
@@ -21,28 +31,17 @@ export default class extends PureComponent {
     window.removeEventListener("resize", this.updateDimensions.bind(this));
   }
 
-  /**
-  componentDidMount() {
-    this.workspace = injectWorkSpace(this.blocks);
-    const self = this;
-    setTimeout(() => {
-      self.onResize();
-      Blockly.svgResize(self.workspace);
-      self.workspace.addChangeListener(self.onWorkspaceChange);
-    }, 200);
-  }
-*/
-
   @autobind
   onWorkspaceChange() {
-    const { changeCode } = this.props;
+    const { onChange } = this.props;
 
-    if (changeCode) {
+    if (onChange) {
+      /*
       const xmlDom = Blockly.Xml.workspaceToDom(this.workspace);
       const xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-      const JavaScript = Blockly.JavaScript.workspaceToCode(this.workspace);
-      const jsonCommands = Blockly.JSON.workspaceToCode(this.workspace);
-      changeCode({ json: jsonCommands, xml: xmlText, JavaScript });
+       */
+      const cmds = Blockly.DockerCompose.workspaceToCode(this.workspace);
+      onChange(cmds);
     }
   }
 
@@ -66,12 +65,6 @@ export default class extends PureComponent {
   }
 
   render() {
-    const { highlightedBlockId, children } = this.props;
-
-    if (this.workspace) {
-      this.workspace.highlightBlock(highlightedBlockId);
-    }
-
     const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     return (
       <div ref={(el) => { this.blocklyArea = el; }} style={{ height: h }} >

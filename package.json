@@ -27,6 +27,7 @@
     "element-theme-default": "^1.4.2",
     "es6-promise": "^4.1.1",
     "node-blockly": "^1.0.24",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "webpack": "^3.5.5",

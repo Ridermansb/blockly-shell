@@ -1,3 +1,6 @@
 <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
-    <block type="DockerComposeDown"></block>
+    <category name="Compose">
+        <block type="DockerCompose"></block>
+        <block type="DockerComposeDown"></block>
+    </category>
 </xml>
