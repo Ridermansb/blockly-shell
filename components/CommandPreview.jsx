@@ -9,7 +9,7 @@ const styles = {
   root: {
     position: 'absolute',
     bottom: 24,
-    left: 110,
+    left: 120,
     width: '82%',
   }
 }

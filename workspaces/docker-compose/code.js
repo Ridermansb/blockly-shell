@@ -6,22 +6,43 @@ Blockly.DockerCompose.DockerCompose = (block) => {
 };
 
 Blockly.DockerCompose.DockerComposeDown = (block) => {
-  const removeimage = block.getFieldValue('RemoveImage');
-  const removevolumes = block.getFieldValue('RemoveVolumes') === 'TRUE';
-  const removecontainers = block.getFieldValue('RemoveContainers') === 'TRUE';
+  const removeImage = block.getFieldValue('RemoveImage');
+  const removeVolumes = block.getFieldValue('RemoveVolumes') === 'TRUE';
+  const removeContainers = block.getFieldValue('RemoveContainers') === 'TRUE';
 
   let code = 'down';
-  if (removeimage && removeimage !== '0') {
-    code += ` --rmi ${removeimage}`
+  if (removeImage && removeImage !== '0') {
+    code += ` --rmi ${removeImage}`
   }
 
-  if (removevolumes) {
+  if (removeVolumes) {
     code += ' -v'
   }
 
-  if (removecontainers) {
+  if (removeContainers) {
     code += ' --remove-orphans'
   }
 
   return `docker-compose ${code.trim()}\n`;
 }
+
+Blockly.DockerCompose.DockerComposeRm = (block) => {
+  const force = block.getFieldValue('FORCE') === 'TRUE';
+  const stop = block.getFieldValue('STOP') === 'TRUE';
+  const remove_volumes = block.getFieldValue('REMOVE_VOLUMES') === 'TRUE';
+  const service = Blockly.DockerCompose.valueToCode(block, 'DOCKER_COMPOSE_RM_SERVICE',
+    Blockly.DockerCompose.ORDER_ATOMIC) || '';
+
+  let code = 'rm';
+  if (force) {
+    code += ' -f'
+  }
+  if (stop) {
+    code += ' -s'
+  }
+  if (remove_volumes) {
+    code += ' -v'
+  }
+
+  return `docker-compose ${code.trim()} ${service.trim()}\n`;
+};
