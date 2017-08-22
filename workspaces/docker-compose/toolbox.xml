@@ -1,9 +1,0 @@
-<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
-    <category name="Compose" colour="225">
-        <block type="DockerCompose"></block>
-        <block type="DockerComposeDown"></block>
-        <block type="DockerComposeRm"></block>
-    </category>
-    <category name="Variables" colour="330" custom="VARIABLE"></category>
-    <category name="Functions" colour="290" custom="PROCEDURE"></category>
-</xml>

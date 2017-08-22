@@ -1,28 +1,32 @@
 import Blockly from 'node-blockly/browser';
 
 /**
- * @see https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#t47qjh
+ * @see https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#5mdw7b
  * @type {{init: (())}}
  */
-Blockly.Blocks.DockerCompose = {
+Blockly.Blocks.Line = {
   init() {
-    this.appendStatementInput("DockerCompose")
+    this.appendStatementInput("LINES")
       .setCheck("String")
-      .appendField("Docker Compose");
+      .setAlign(Blockly.ALIGN_CENTRE)
+      .appendField("Split by")
+      .appendField(new Blockly.FieldDropdown([["&&"," && "], ["||"," || "], [";","; "]]), "SEPARATOR");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(10);
+    this.setColour(225);
+    this.setHelpUrl("https://stackoverflow.com/a/5130889/491181");
   },
 };
 
 /**
- * @see https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#r4efaw
+ * @see https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#b86mu3
  * @type {{init: (())}}
  */
 Blockly.Blocks.DockerComposeDown = {
   init() {
     this.appendDummyInput()
-      .appendField("down")
+      .appendField("docker-compose down");
+    this.appendDummyInput()
       .appendField("Remove Image?")
       .appendField(new Blockly.FieldDropdown([["No","0"], ["All","all"], ["Local","local"]]), "RemoveImage")
       .appendField("Remove volumes?")
@@ -30,20 +34,24 @@ Blockly.Blocks.DockerComposeDown = {
       .appendField("Remove containers?")
       .appendField(new Blockly.FieldCheckbox("FALSE"), "RemoveContainers");
     this.setInputsInline(false);
-    this.setPreviousStatement(true, ["String", "DockerCompose"]);
+    this.setPreviousStatement(true, "String");
     this.setNextStatement(true, "String");
-    this.setColour(220);
+    this.setColour(225);
     this.setTooltip("Stops containers and removes containers, networks, volumes, and images created by up.");
     this.setHelpUrl("https://docs.docker.com/compose/reference/down/");
   }
 }
 
-
+/**
+ * @see https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ntergh
+ * @type {{init: Blockly.Blocks.DockerComposeRm.init}}
+ */
 Blockly.Blocks.DockerComposeRm = {
   init: function() {
-    this.appendValueInput("DOCKER_COMPOSE_RM_SERVICE")
+    this.appendDummyInput()
+      .appendField("docker-compose rm");
+    this.appendValueInput("SERVICE")
       .setCheck("String")
-      .appendField("rm")
       .appendField("Force?")
       .appendField(new Blockly.FieldCheckbox("FALSE"), "FORCE")
       .appendField("Stop?")
@@ -51,8 +59,7 @@ Blockly.Blocks.DockerComposeRm = {
       .appendField("Remove Volumes?")
       .appendField(new Blockly.FieldCheckbox("FALSE"), "REMOVE_VOLUMES")
       .appendField("Service");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, ["DockerCompose", "String"]);
+    this.setPreviousStatement(true, "String");
     this.setNextStatement(true, "String");
     this.setColour(230);
     this.setTooltip("Removes stopped service containers.");

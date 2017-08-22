@@ -95,8 +95,9 @@ export default class extends PureComponent {
         <div className="grid-content bg-purple-dark">
           <Card className="box-card" style={styles.card}>
             <pre>
-              <code className="shell">
-                {hljs.highlight('shell', commands).value}
+              <code
+                className="shell"
+                dangerouslySetInnerHTML={{__html: hljs.highlight('shell', commands).value}}>
               </code>
             </pre>
             {clipboardCopyIsSupport &&

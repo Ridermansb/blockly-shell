@@ -1,0 +1,25 @@
+<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+    <category name="Terminal" colour="205">
+        <block type="Line"></block>
+    </category>
+    <category name="Compose" colour="225">
+        <block type="DockerComposeDown"></block>
+        <block type="DockerComposeRm">
+            <field name="FORCE">FALSE</field>
+            <field name="STOP">FALSE</field>
+            <field name="REMOVE_VOLUMES">FALSE</field>
+            <value name="SERVICE">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+        </block>
+
+    </category>
+    <category name="Text" colour="#5CA68D">
+        <block type="text">
+            <field name="TEXT"></field>
+        </block>
+    </category>
+    <category name="Variables" colour="320" custom="VARIABLE"></category>
+</xml>

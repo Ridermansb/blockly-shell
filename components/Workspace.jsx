@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Blockly from 'node-blockly/browser';
 import { autobind } from 'core-decorators';
-import DockerCompose from '../workspaces/docker-compose';
+import Docker from '../workspaces/docker';
 
 export default class extends PureComponent {
 
@@ -21,7 +21,7 @@ export default class extends PureComponent {
   }
 
   componentDidMount() {
-    const workspace = Blockly.inject(this.blocklyDiv, DockerCompose);
+    const workspace = Blockly.inject(this.blocklyDiv, Docker);
     this.workspace = workspace;
     workspace.addChangeListener(this.onWorkspaceChange);
 
@@ -45,7 +45,7 @@ export default class extends PureComponent {
       const xmlDom = Blockly.Xml.workspaceToDom(this.workspace);
       const xmlText = Blockly.Xml.domToPrettyText(xmlDom);
        */
-      const cmds = Blockly.DockerCompose.workspaceToCode(this.workspace);
+      const cmds = Blockly.Shell.workspaceToCode(this.workspace);
       onChange(cmds);
     }
   }
