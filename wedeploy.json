@@ -1,6 +1,7 @@
 {
-    "id": "ui-blockcmd.wedeploy.io",
+    "id": "ui",
     "env": {
         "WEDEPLOY_WEB_PATH": "dist"
-    }
+    },
+    "customDomains": ["block-shell.ridermansb.me"]
 }
