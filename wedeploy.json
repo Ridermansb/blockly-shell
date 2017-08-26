@@ -1,0 +1,6 @@
+{
+    "id": "ui-blockcmd.wedeploy.io",
+    "env": {
+        "WEDEPLOY_WEB_PATH": "dist"
+    }
+}
