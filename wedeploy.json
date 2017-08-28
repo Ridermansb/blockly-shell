@@ -3,6 +3,5 @@
     "image": "wedeploy/hosting:0.0.1",
     "env": {
         "WEDEPLOY_WEB_PATH": "dist"
-    },
-    "customDomains": ["block-shell.ridermansb.me", "www.block-shell.ridermansb.me"]
+    }
 }
